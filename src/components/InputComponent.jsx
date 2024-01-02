@@ -27,35 +27,35 @@ const InputComponent = ({ checkbox, handleCheckbox }) => {
       <fieldset className="checkboxRow">
         <Checkbox
           type="checkbox"
-          name="attractions"
+          name="attraction"
           value="관광지"
           onClick={handleCheckbox}
         />
         <span style={{ color: "black" }}>관광지</span>
         <Checkbox
           type="checkbox"
-          name="accommodations"
+          name="accommodation"
           value="숙박"
           onClick={handleCheckbox}
         />
         <span style={{ color: "black" }}>숙박</span>
         <Checkbox
           type="checkbox"
-          name="themes"
+          name="theme"
           value="여행지"
           onClick={handleCheckbox}
         />
         <span style={{ color: "black" }}>여행지</span>
         <Checkbox
           type="checkbox"
-          name="foods"
+          name="food"
           value="음식점"
           onClick={handleCheckbox}
         />
         <span style={{ color: "black" }}>음식점</span>
         <Checkbox
           type="checkbox"
-          name="festivals"
+          name="festival"
           value="축제공연행사"
           onClick={handleCheckbox}
         />

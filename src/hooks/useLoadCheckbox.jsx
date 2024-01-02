@@ -16,7 +16,7 @@ export default function useLoadCheckbox(checkbox, setStoreData) {
 
 async function getMapData(checkboxIndex) {
   const result = await axios.get(
-    `http://13.209.46.215:8080/api/travels/${checkboxIndex}`,
+    `http://13.209.46.215:8080/api/travels/info/${checkboxIndex}`,
   );
 
   return result;

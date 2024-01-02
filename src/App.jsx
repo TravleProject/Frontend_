@@ -1,4 +1,5 @@
-import { createGlobalStyle } from "styled-components"
+/* eslint-disable react/react-in-jsx-scope */
+import { createGlobalStyle } from "styled-components";
 import Router from "./rotuer/Router";
 
 const GlobalStyle = createGlobalStyle`
@@ -56,7 +57,7 @@ const App = () => {
       <GlobalStyle />
       <Router />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

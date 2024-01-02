@@ -1,10 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable indent */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // libraries
-import axios from "axios";
 
 // custom hooks
 import useInput from "../hooks/useInput";
@@ -16,7 +15,7 @@ import SignupComponent from "../components/SignupComponent";
 // img
 import styled from "styled-components";
 import Plane from "../assets/plane.png";
-import Cloud from "../assets/cloud1.png";
+import Cloud from "../assets/cloud.png";
 import Cloud2 from "../assets/cloud2.png";
 import Cloud4 from "../assets/cloud4.png";
 import Wood from "../assets/wood.png";

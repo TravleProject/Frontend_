@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 // img
 import Avatarimg from "../assets/Avatar_etc.png";
-import Edits from "../assets/edit.png";
+import Edits from "../assets/edit-02.png";
 
 const Review = ({ review }) => {
   console.log("review: ", review);
