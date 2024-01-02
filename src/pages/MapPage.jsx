@@ -17,8 +17,8 @@ import InputComponent from "../components/InputComponent";
 import ModalComponent from "../components/ModalComponent";
 
 // img
-import Markers from "../assets/markers.png";
-import myMarkers from "../assets/myMarker.png";
+import Location from "../assets/location.png";
+import DMarkers from "../assets/3DMarker.png";
 
 // custom hooks
 import useLoadCheckbox from "../hooks/useLoadCheckbox";
@@ -88,9 +88,9 @@ const MapPage = () => {
       map: kmap,
       icon: {
         content:
-          `<img src=${myMarkers} alt="" ` +
-          'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block;' +
-          'width: 22px; height: 22px;">',
+          `<img src=${Location} alt="" ` +
+          'style="margin: 0px; padding: 0px; border: 0px solid transparent;' +
+          'width: 20px; height: 30px;">',
       },
     });
 
@@ -101,9 +101,9 @@ const MapPage = () => {
         map: kmap,
         icon: {
           content:
-            `<img src=${Markers} alt="" ` +
+            `<img src=${DMarkers} alt="" ` +
             'style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; ' +
-            '-webkit-user-select: none; position: absolute; width: 22px; height: 22px; left: 0px; top: 5px;">',
+            '-webkit-user-select: none; position: absolute; width: 30px; height: 30px; left: 0px; top: 5px;">',
         },
       });
 
@@ -116,7 +116,7 @@ const MapPage = () => {
 
       markerd.addListener("click", async () => {
         setIsvisible((prevIsvisible) => !prevIsvisible);
-        const fetchData = useClickedData(checkbox, setClickedData, i);
+        const fetchData = useClickedData(checkbox, setClickedData, item.title);
         fetchData();
       });
 
@@ -134,8 +134,6 @@ const MapPage = () => {
     naver.maps.Event.addListener(kmap, "idle", () => {
       const center = kmap.getCenterPoint(); // 이동 후 중심 좌표 가져오기
       const cntZoom = kmap.getZoom();
-      // console.log("이동 후 좌표:", center);
-      // console.log("이동 후 지도 크기", cntZoom);
       setZoomSize(cntZoom);
       setcntState((prev) => ({
         ...prev,
@@ -147,10 +145,8 @@ const MapPage = () => {
 
   useEffect(() => {
     console.log("storeData: ", storeData);
-    // console.log("zoomSize, cntState: ", zoomSize, cntState);
     console.log("clickedData: ", clickedData);
-    console.log("isvisible: ", isvisible);
-  }, [storeData, clickedData, isvisible]);
+  }, [storeData, clickedData]);
 
   return (
     <Container>
@@ -167,7 +163,7 @@ const MapPage = () => {
       </div>
       {isvisible && Object.keys(clickedData).length > 0 ? (
         <ModalComponent
-          selectedData={clickedData}
+          selectedData={clickedData[0]}
           isvisible={isvisible}
           setIsvisible={setIsvisible}
           review={review}

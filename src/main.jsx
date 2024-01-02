@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { RecoilRoot } from "recoil";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import App from "./App.jsx";
 import "./index.css";
 
@@ -13,7 +14,13 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <RecoilRoot>
-    <App />
-  </RecoilRoot>,
+  <GoogleOAuthProvider
+    clientId={import.meta.env.VITE_GOOGLE_AUTH_CLIENTID}
+    onScriptLoadSuccess={() => console.log("성공")}
+    onScriptLoadError={() => console.log("실패")}
+  >
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
+  </GoogleOAuthProvider>,
 );

@@ -9,13 +9,16 @@ import useKakaoLogin from "../hooks/useKakaoLogin";
 
 // libraries
 import styled from "styled-components";
+import { useGoogleLogin } from "@react-oauth/google";
 
 // img
 import Login from "../assets/log-out-1.png";
 import Showpwd from "../assets/eye-open.png";
 import Lock from "../assets/lock.png";
-import KakaoButton from "../assets/social_kakao_wide.png";
 import Hidepwd from "../assets/eye-hidden.png";
+import KakaoSocial from "../assets/kakao_login_medium.png";
+import GoogleSimple from "../assets/google_login_medium.png";
+import axios from "axios";
 
 const LoginComponent = ({ goMain, setUserData, id, pwd }) => {
   const [isShown, setIsShown] = useState(false);
@@ -27,6 +30,18 @@ const LoginComponent = ({ goMain, setUserData, id, pwd }) => {
   const [kakao, Logins] = useKakaoLogin({
     rest_api_key: import.meta.env.VITE_REST_API,
     redirect_uri: import.meta.env.VITE_REDIRECT_URL,
+  });
+
+  const login = useGoogleLogin({
+    flow: "auth-code",
+    onSuccess: async (tokenResponse) => {
+      console.log("토큰 발급 성공: ", tokenResponse);
+      // const tokens = await axios.post("http://localhost:3000/auth/google/", {
+      //   code: tokenResponse.code,
+      // });
+      window.postMessage({ type: "login_success" }, window.origin);
+    },
+    onError: (errorResponse) => console.log("Error: ", errorResponse),
   });
 
   return (
@@ -60,7 +75,10 @@ const LoginComponent = ({ goMain, setUserData, id, pwd }) => {
         <LoginButton onClick={goMain}>Login</LoginButton>
       </div>
       <div className="login">다른 계정으로 로그인하기</div>
-      <SocialButton onClick={Logins} src={KakaoButton} />
+      <div className="buttonRow">
+        <SocialButton onClick={Logins} src={KakaoSocial} />
+        <SocialButtonG onClick={() => login()} src={GoogleSimple} />
+      </div>
     </Container>
   );
 };
@@ -90,7 +108,7 @@ const Container = styled.div`
   .rows {
     display: flex;
     flex-direction: row;
-    margin-top: 2em;
+    margin-top: 1.5em;
     margin-right: 2em;
     width: 90%;
     align-items: center;
@@ -100,9 +118,21 @@ const Container = styled.div`
     color: black;
   }
   .login {
+    text-align: left;
+    width: 90%;
     margin-top: 1em;
+    margin-right: 2em;
     color: black;
     font-weight: 600;
+  }
+  .buttonRow {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+    margin-right: 2em;
+    width: 90%;
+    align-items: center;
+    justify-content: flex-start;
   }
 `;
 
@@ -158,7 +188,12 @@ const LoginButton = styled.button`
 `;
 
 const SocialButton = styled.img`
-  margin: 1em;
-  width: 25vw;
-  height: 8vh;
+  width: 7.5vw;
+  height: 7.5vh;
+`;
+
+const SocialButtonG = styled.img`
+  margin-left: 0.5rem;
+  width: 7.5vw;
+  height: 7.5vh;
 `;
